@@ -1,6 +1,6 @@
 <?php include "includes/admin_header.php"; ?>
 <div id="wrapper">
-<?php if($connection) echo "Connected" ?>
+
 
 <!-- Navigation -->
 <?php  include "includes/admin_navigation.php"; ?>
@@ -14,6 +14,7 @@
 <div class="row">
 <div class="col-lg-12">
 <h1 class="page-header">
+   <?php if(!$connection) echo "Not Connected to DB<br>" ?>
     Welcome to DU Express Admin
     <small>
         <?php echo $_SESSION["username"]; ?>
@@ -145,6 +146,11 @@
                 <!-- /.row -->
 
     <?php
+    
+    $query="SELECT * FROM posts WHERE post_status='published'";
+    $select_all_published_posts=mysqli_query($connection, $query);
+    $post_published_count=mysqli_num_rows($select_all_published_posts); 
+    
     $query="SELECT * FROM posts WHERE post_status='draft'";
     $select_all_draft_users=mysqli_query($connection, $query);
     $post_draft_count=mysqli_num_rows($select_all_draft_users); 
@@ -173,10 +179,10 @@
           ['Data', 'Count'],
             
             <?php
-            $element_text=['Active Posts','Draft Posts','Comments','Pending Comments','Users','Subscribers','Categories'];
-            $element_count=[$post_counts, $post_draft_count ,$comment_counts, $unapproved_comment_count, $user_counts,$subscriber_count,$category_counts];
+            $element_text=['All Posts','Published Posts','Draft Posts','Comments','Pending Comments','Users','Subscribers','Categories'];
+            $element_count=[$post_counts,$post_published_count, $post_draft_count ,$comment_counts, $unapproved_comment_count, $user_counts,$subscriber_count,$category_counts];
             
-            for($i=0; $i<7; $i++){
+            for($i=0; $i<8; $i++){
                 echo "['{$element_text[$i]}'".","."{$element_count[$i]}],";
             }
             ?>
