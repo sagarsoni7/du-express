@@ -126,11 +126,12 @@ if(isset($_POST["update_post"])){
           $query .= "WHERE post_id = {$ep_id} ";
         
         $update_post = mysqli_query($connection,$query);
-    header("Location: posts.php");
+    
     
     if(!$update_post){
         echo "query failed".mysqli_error($connection);
     }
+    echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$ep_id}'>View Post</a> OR <a href='posts.php'>Edit more posts</a></p>";
 }
 ?>   
    
