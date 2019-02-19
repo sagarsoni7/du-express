@@ -39,20 +39,18 @@
                     ?>
                    
                    <li><a href="admin">ADMIN PANEL</a></li>
-                     
-                      <?php 
-
-      if (session_status() == PHP_SESSION_NONE) session_start(); // Added this
- 
-if (isset($_SESSION['user_role'])) {
-    if (isset($_GET['p_id'])) {
-        $the_post_id = $_GET['p_id'];
-        echo "<li><a href='admin/posts.php?source=edit_post&ep={$the_post_id}'>Edit Post</a></li>";
-    }
-}
-
-        ?>
-            
+<!--
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+-->
+                    
                     
                 </ul>
             </div>
