@@ -38,9 +38,8 @@ if(isset($_POST['create_post'])){
         <input type="text" class="form-control" name="title">
     </div>
     <div class="form-group">
-       <label for="post_category">Post Category</label>
-       
-       <select name="post_category_id" id="post_category_id">
+      
+       <select class="form-control" name="post_category_id" id="post_category_id">
             <?php
             $query="SELECT * FROM categories";
             $select_categories = mysqli_query($connection, $query);
@@ -59,12 +58,16 @@ if(isset($_POST['create_post'])){
         <input type="text" class="form-control" name="author">
     </div>
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" name="post_status" class="form-control">
+        
+        <select name="post_status" class="form-control">
+            <option value="draft">Post Status</option>
+            <option value="published">Publish</option>
+            <option value="draft">Draft</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="post_image">Post Image</label>
-        <input type="file" name="image">
+        <input class="form-control" type="file" name="image">
     </div>
     <div class="form-group">
         <label for="post_tags">Post Tags</label>
