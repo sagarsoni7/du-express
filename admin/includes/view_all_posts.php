@@ -1,10 +1,49 @@
-<h1 class="page-header">
+<?php
+if(isset($_POST["checkBoxArray"])){
+    foreach($_POST["checkBoxArray"] as $postValueId){
+        $bulk_options=$_POST["bulk_options"];
+       
+        switch($bulk_options){
+            case "published":
+                $query="UPDATE posts SET post_status='{$bulk_options}' WHERE post_id={$postValueId}";
+                $update_to_published_status=mysqli_query($connection,$query);
+                break;
+            case "draft":
+                $query="UPDATE posts SET post_status='{$bulk_options}' WHERE post_id={$postValueId}";
+                $update_to_draft_status=mysqli_query($connection,$query);
+                break;
+            case "delete":
+                $query="DELETE FROM posts WHERE post_id={$postValueId}";
+                $update_to_deleted_status=mysqli_query($connection,$query);
+                break;    
+        }
+    }
+}
+ 
+?>  
+ 
+   <h1 class="page-header">
     All Posts
     <small>Here you can manage all posts.</small>
 </h1>
-   <table class="table table-bordered table-hover">
+   <form action="" method="post">
+      <table class="table table-bordered table-hover">
+       <div id="bulkOptionContainer" class="col-xs-4">
+           <select name="bulk_options" id="" class="form-control">
+               <option value="">Select Options</option>
+               <option value="published">Publish</option>
+               <option value="draft">Draft</option>
+               <option value="delete">Delete</option>
+           </select>
+       </div>
+       <div class="col-xs-4">
+           <input type="submit" name="submit" class="btn btn-success" value="Apply">
+           <a href="add_post.php" class="btn btn-primary">Add New</a>
+       </div>
+   <br>
     <thead>
         <tr>
+           <th><input type="checkbox" id="selectAllBoxes"></th>
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
@@ -34,6 +73,12 @@
             $post_comment_count=$row['post_comment_count'];
             $post_date=$row['post_date'];
             echo "<tr>";
+                ?>
+               
+                <td><input type="checkbox" class="checkboxes" name="checkBoxArray[]" value="<?php echo $post_id; ?>" ></td>
+               
+                <?php
+               
             echo "<td>{$post_id}</td>";
             echo "<td>{$post_author}</td>";
             echo "<td>{$post_title}</td>";
@@ -44,8 +89,8 @@
                 $cat_title=$row['cat_title'];
                 echo "<td>{$cat_title}</td>";
                 }
-                    
-            
+                   
+           
             echo "<td>{$post_status}</td>";
             echo "<td><img src='../images/{$post_image}' class='img-responsive' width=100 ></td>";
             echo "<td>{$post_tags}</td>";
@@ -55,13 +100,13 @@
             echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
             echo "</tr>";
             }
-        
+       
         ?>
        
     </tbody>
 </table>
-
-
+</form>
+ 
 <?php
 if(isset($_GET['delete'])){
     $the_post_id=$_GET['delete'];
@@ -69,8 +114,8 @@ if(isset($_GET['delete'])){
     $delete_query=mysqli_query($connection, $query);
     header("Location: posts.php");
 }
-
-
-
-
+ 
+ 
+ 
+ 
 ?>

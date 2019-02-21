@@ -47,6 +47,12 @@ if(!isset($_SESSION["user_role"])){
 
 <!-- WYSIWYG Editor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+
+<!-- WYSIWYG Editor Script -->
+<script src="js/scripts.js"></script>
 </head>
 
 <body>
