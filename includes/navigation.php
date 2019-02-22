@@ -38,7 +38,8 @@
                     
                     ?>
                    
-                   <li><a href="admin">ADMIN PANEL</a></li>
+                   <li><a href="admin">Admin Panel</a></li>
+                     <li><a href="registration.php">User Registration</a></li>
                       <?php 
       if (session_status() == PHP_SESSION_NONE) session_start(); // Added this
  

@@ -26,6 +26,7 @@ $select_user_query=mysqli_query($connection, $query);
         $db_user_lastname=$row["user_lastname"];
         $db_user_role=$row["user_role"];
     }
+    $password=crypt($password, $db_user_password);
     
     if($username === $db_username && $password === $db_user_password){
         $_SESSION["username"]=$db_username;
