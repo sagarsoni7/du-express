@@ -23,6 +23,10 @@
             if(isset($_GET["p_id"])){
                 $the_post_id=$_GET["p_id"];
                 
+                $view_query="UPDATE posts SET post_views_count=post_views_count+1 WHERE post_id='$the_post_id'";
+                $view_update_query=mysqli_query($connection, $view_query);
+            }else{
+                header("Location: index.php");
             }
 
             $query ="SELECT * FROM posts WHERE post_id={$the_post_id}";

@@ -69,6 +69,7 @@ if(isset($_POST["checkBoxArray"])){
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
+            <th>Views</th>
             <th>Category</th>
             <th>Status</th>
             <th>Image</th>
@@ -88,6 +89,7 @@ if(isset($_POST["checkBoxArray"])){
             $post_id=$row['post_id'];
             $post_author=$row['post_author'];
             $post_title=$row['post_title'];
+            $post_views=$row['post_views_count'];
             $post_category_id=$row['post_category_id'];
             $post_status=$row['post_status'];
             $post_image=$row['post_image'];
@@ -104,6 +106,7 @@ if(isset($_POST["checkBoxArray"])){
             echo "<td>{$post_id}</td>";
             echo "<td>{$post_author}</td>";
             echo "<td><a href='../post.php?p_id={$post_id} '>{$post_title}</a></td>";
+            echo "<td>{$post_views}</td>";    
                 $query="SELECT * FROM categories WHERE cat_id=$post_category_id";
                 $select_categories_id = mysqli_query($connection, $query);
                 while($row=mysqli_fetch_assoc($select_categories_id)){
