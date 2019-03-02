@@ -19,11 +19,27 @@
 
                 <!-- First Blog Post -->
         <?php
+    
+            if(isset($_GET["page"])){
+                $page_num=$_GET["page"];
+            }else{
+                $page_num=1;
+            }
+            
+            $offset=5*($page_num-1);
+            echo $page_num;
+            echo "<br>";
+            echo $offset;
+            
+            $post_query_count="SELECT * FROM posts WHERE post_status='published'";
+            $find_count=mysqli_query($connection, $post_query_count);
+            $count=mysqli_num_rows($find_count);
+            $count=ceil($count/5);
 
-            $query ="SELECT * FROM posts WHERE post_status='published'";
+            $query ="SELECT * FROM posts WHERE post_status='published' ORDER BY post_id LIMIT {$offset},5";
             $select_all_posts_query= mysqli_query($connection, $query);
 
-        if(mysqli_num_rows($select_all_posts_query)==0){
+        if(mysqli_num_rows($find_count)==0){
        echo "<h2>Sorry there are no published posts to show</h2>";
  }else{
                              
@@ -57,7 +73,16 @@
 
                 <?php }} ?>
 
-               
+              <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                <ul class="pager">
+                
+            <?php 
+                    for($i=1; $i<=$count; $i++){
+                        echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+                    }
+                    ?>
+            
+        </ul>
 
             </div>
 
@@ -68,5 +93,7 @@
         <!-- /.row -->
 
         <hr>
+        
+       
         
         <?php include "includes/footer.php" ?>
