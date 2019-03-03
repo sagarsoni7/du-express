@@ -27,9 +27,7 @@
             }
             
             $offset=5*($page_num-1);
-            echo $page_num;
-            echo "<br>";
-            echo $offset;
+            
             
             $post_query_count="SELECT * FROM posts WHERE post_status='published'";
             $find_count=mysqli_query($connection, $post_query_count);
