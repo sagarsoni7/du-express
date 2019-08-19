@@ -24,7 +24,3 @@ A clean and simple Content Management System using vanilla PHP and MySQL.
  - Escaping user inputs
  - Posts pagination
  - Users online counter
- 
- 
-
-> I will keep adding more features and security practicies to this project.
